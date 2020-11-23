@@ -8,10 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tdrecyclerview.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.util.UUID;
 
 class TaskListFragment : Fragment()
 {
-    private val taskList = listOf("Jalik", "Jed", "Task 3")
+    private val taskList = mutableListOf(
+        Task(id = UUID.randomUUID().toString(), title = "Jalik"),
+        Task(id = UUID.randomUUID().toString(), title = "Jed")
+        )
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
@@ -28,5 +33,11 @@ class TaskListFragment : Fragment()
         var recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.adapter = TaskListAdapter(taskList)
+        var addTask = view.findViewById<FloatingActionButton>(R.id.addTaskButton);
+        addTask.setOnClickListener{
+            taskList.add(Task(id = UUID.randomUUID().toString(), title = "Task ${taskList.size + 1}"))
+        }
     }
+
+
 }
