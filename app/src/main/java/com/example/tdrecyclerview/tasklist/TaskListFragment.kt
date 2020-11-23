@@ -13,9 +13,10 @@ import java.util.UUID;
 
 class TaskListFragment : Fragment()
 {
+    //var recyclerView = null;
     private val taskList = mutableListOf(
-        Task(id = UUID.randomUUID().toString(), title = "Jalik"),
-        Task(id = UUID.randomUUID().toString(), title = "Jed")
+        Task(id = UUID.randomUUID().toString(), title = "Jalik", description = "Codeur fatigué"),
+        Task(id = UUID.randomUUID().toString(), title = "Jed", description = "Try harder des enfers")
         )
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
@@ -35,7 +36,8 @@ class TaskListFragment : Fragment()
         recyclerView.adapter = TaskListAdapter(taskList)
         var addTask = view.findViewById<FloatingActionButton>(R.id.addTaskButton);
         addTask.setOnClickListener{
-            taskList.add(Task(id = UUID.randomUUID().toString(), title = "Task ${taskList.size + 1}"))
+            taskList.add(Task(id = UUID.randomUUID().toString(), title = "Task ${taskList.size + 1}", description = "new task"))
+            (recyclerView.adapter as TaskListAdapter).notifyDataSetChanged()
         }
     }
 
