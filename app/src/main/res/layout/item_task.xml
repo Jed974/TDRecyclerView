@@ -22,6 +22,14 @@
             android:text="hey"
             android:textAlignment="center"
             android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            app:icon="@android:drawable/ic_menu_delete" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

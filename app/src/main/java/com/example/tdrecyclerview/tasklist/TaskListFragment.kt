@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,11 +36,16 @@ class TaskListFragment : Fragment()
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.adapter = TaskListAdapter(taskList)
         var addTask = view.findViewById<FloatingActionButton>(R.id.addTaskButton);
-        addTask.setOnClickListener{
+        addTask.setOnClickListener {
             taskList.add(Task(id = UUID.randomUUID().toString(), title = "Task ${taskList.size + 1}", description = "new task"))
             (recyclerView.adapter as TaskListAdapter).notifyDataSetChanged()
         }
-    }
 
+        var taskDeleteButton = recyclerView.findViewById<Button>(R.id.delete_button)
 
+        /*recyclerView.adapter.onDeleteClickListener = { task ->
+            // Supprimer la tâche
+            taskList.remove(task)
+            recyclerView.adapter.notifyDataSetChanged()*/
+        }
 }
