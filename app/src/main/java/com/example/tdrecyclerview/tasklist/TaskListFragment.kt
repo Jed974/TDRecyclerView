@@ -7,11 +7,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-<<<<<<< HEAD
-=======
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
->>>>>>> 4e18e99ddba4d5c63576ea389d1315de3488c35b
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,6 +27,7 @@ class TaskListFragment : Fragment()
         )
 
     var adapter = TaskListAdapter()
+    private val tasksRepository = TasksRepository()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
@@ -83,11 +81,9 @@ class TaskListFragment : Fragment()
         val textView = view?.findViewById<TextView>(R.id.textViewUser)
         lifecycleScope.launch{
             tasksRepository.refresh()
-            val userInfo = Api.userService.getInfo().body()!!
-            textView?.text = userInfo
+            val userInfo = Api.userService.getInfo().body()
+            textView?.text = userInfo.toString()
         }
     }
-
-    private val tasksRepository = TasksRepository()
 
 }

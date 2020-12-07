@@ -1,7 +1,9 @@
 package com.example.tdrecyclerview.tasklist
 
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Task(
         @SerialName("id")
         val id : String,
@@ -10,10 +12,3 @@ data class Task(
         @SerialName("description")
         val description : String
 )
-{
-    override fun equals(other: Any?): Boolean {
-        return  (other is Task)
-                && other.id.equals(this.id);
-    }
-
-}
