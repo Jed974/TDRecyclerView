@@ -17,7 +17,7 @@ object Api {
         retrofit.create(UserService::class.java)
     }
 
-    val taskWebService: TasksWebService by lazy {
+    val tasksWebService: TasksWebService by lazy {
         retrofit.create(TasksWebService::class.java)
     }
 
