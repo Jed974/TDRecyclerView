@@ -1,5 +1,6 @@
 package com.example.tdrecyclerview.network
 
+import com.example.tdrecyclerview.tasklist.TasksWebService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -14,6 +15,10 @@ object Api {
 
     val userService: UserService by lazy {
         retrofit.create(UserService::class.java)
+    }
+
+    val taskWebService: TasksWebService by lazy {
+        retrofit.create(TasksWebService::class.java)
     }
 
     // on construit une instance de parseur de JSON:
