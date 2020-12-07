@@ -47,5 +47,11 @@ class TaskListFragment : Fragment()
             // Supprimer la tâche
             taskList.remove(task)
             recyclerView.adapter.notifyDataSetChanged()*/
-        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val userInfo = Api.userService.getInfo().body()!!
+
+    }
 }
