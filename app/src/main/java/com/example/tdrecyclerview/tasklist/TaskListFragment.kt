@@ -7,6 +7,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+<<<<<<< HEAD
+=======
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+>>>>>>> 4e18e99ddba4d5c63576ea389d1315de3488c35b
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +29,8 @@ class TaskListFragment : Fragment()
         Task(id = UUID.randomUUID().toString(), title = "Jed", description = "Try harder des enfers")
         )
 
+    var adapter = TaskListAdapter()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         //return super.onCreateView(inflater, container, savedInstanceState)
@@ -33,32 +40,54 @@ class TaskListFragment : Fragment()
         return rootView
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?)
+    {
         super.onViewCreated(view, savedInstanceState)
 
         var recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        recyclerView.adapter = TaskListAdapter(taskList)
+
+        recyclerView.adapter = adapter
+
         var addTask = view.findViewById<FloatingActionButton>(R.id.addTaskButton);
         addTask.setOnClickListener {
-            taskList.add(Task(id = UUID.randomUUID().toString(), title = "Task ${taskList.size + 1}", description = "new task"))
-            (recyclerView.adapter as TaskListAdapter).notifyDataSetChanged()
+            //taskList.add(Task(id = UUID.randomUUID().toString(), title = "Task ${taskList.size + 1}", description = "new task"))
+            lifecycleScope.launch {
+                val task = Task(id = UUID.randomUUID().toString(), title = "Task ${taskList.size + 1}", description = "new task")
+                tasksRepository.createTask(task)
+                adapter.notifyDataSetChanged()
+            }
         }
 
         var taskDeleteButton = recyclerView.findViewById<Button>(R.id.delete_button)
 
+        adapter.onDeleteClickListener = { task ->
+            lifecycleScope.launch {
+                tasksRepository.deleteTask(task.id)
+                adapter.notifyDataSetChanged()
+            }
+        }
         /*recyclerView.adapter.onDeleteClickListener = { task ->
             // Supprimer la tâche
             taskList.remove(task)
             recyclerView.adapter.notifyDataSetChanged()*/
+        tasksRepository.taskList.observe(viewLifecycleOwner, Observer {
+            adapter.taskList = it
+            adapter.notifyDataSetChanged()
+        })
     }
+
 
     override fun onResume() {
         super.onResume()
         val textView = view?.findViewById<TextView>(R.id.textViewUser)
         lifecycleScope.launch{
+            tasksRepository.refresh()
             val userInfo = Api.userService.getInfo().body()!!
             textView?.text = userInfo
         }
     }
+
+    private val tasksRepository = TasksRepository()
+
 }
