@@ -8,9 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tdrecyclerview.R
 
-class TaskListAdapter(private val taskList: List<Task>) : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>()
+class TaskListAdapter() : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>()
 {
 
+
+    var taskList: List<Task> = emptyList()
     // Déclaration de la variable lambda dans l'adapter:
     var onDeleteClickListener: ((Task) -> Unit)? = null
 
