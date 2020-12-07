@@ -25,6 +25,7 @@ class TaskListFragment : Fragment()
         )
 
     var adapter = TaskListAdapter()
+    private val tasksRepository = TasksRepository()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
@@ -74,7 +75,7 @@ class TaskListFragment : Fragment()
         })
     }
 
-    private val tasksRepository = TasksRepository()
+
 
     override fun onResume() {
         super.onResume()
