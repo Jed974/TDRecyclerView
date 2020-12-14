@@ -10,8 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.tdrecyclerview.MainActivity
 import com.example.tdrecyclerview.R
 import com.example.tdrecyclerview.network.Api
+import com.example.tdrecyclerview.userinfo.UserInfoActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class TaskListFragment : Fragment()
@@ -61,6 +63,12 @@ class TaskListFragment : Fragment()
 
         adapter.onUpdateClickListener = { task ->
             viewModel.editTask(task)
+        }
+
+        val imageView = view?.findViewById<ImageView>(R.id.AvatarImage)
+        imageView.setOnClickListener {
+            (activity as MainActivity).changeActivity(UserInfoActivity::class.java)
+
         }
     }
 
