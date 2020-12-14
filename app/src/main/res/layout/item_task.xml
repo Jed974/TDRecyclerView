@@ -11,21 +11,41 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/task_title"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_bright"
-            android:text="hey"
-            android:textAlignment="center"
-            android:textSize="30sp" />
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TaskTitle"
+                android:layout_width="264dp"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/TaskInputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="30sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/UpdateTaskButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                app:srcCompat="@android:drawable/ic_menu_upload" />
+
+        </LinearLayout>
 
         <Button
-            android:id="@+id/delete_button"
-            android:layout_width="match_parent"
+            android:id="@+id/DeleteTaskButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Button"
             app:icon="@android:drawable/ic_menu_delete" />

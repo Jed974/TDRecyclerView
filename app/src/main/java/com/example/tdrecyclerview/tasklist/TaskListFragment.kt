@@ -4,29 +4,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.tdrecyclerview.R
 import com.example.tdrecyclerview.network.Api
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.coroutines.launch
-import java.util.UUID;
 
 class TaskListFragment : Fragment()
 {
     //var recyclerView = null;
-    private val taskList = mutableListOf(
-        Task(id = UUID.randomUUID().toString(), title = "Jalik", description = "Codeur fatigué"),
-        Task(id = UUID.randomUUID().toString(), title = "Jed", description = "Try harder des enfers")
-        )
+    val taskList = emptyList<Task>()
 
-    var adapter = TaskListAdapter()
+    val adapter = TaskListAdapter()
+
+    // On récupère une instance de ViewModel
+    private val viewModel: TaskListViewModel = TaskListViewModel(adapter)
+
+
     private val tasksRepository = TasksRepository()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
@@ -41,6 +39,11 @@ class TaskListFragment : Fragment()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.taskList.observe(viewLifecycleOwner) { newList ->
+            // utliser la liste
+            adapter.taskList = newList
+            adapter.notifyDataSetChanged()
+        }
 
         var recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(activity)
@@ -49,41 +52,33 @@ class TaskListFragment : Fragment()
 
         var addTask = view.findViewById<FloatingActionButton>(R.id.addTaskButton);
         addTask.setOnClickListener {
-            //taskList.add(Task(id = UUID.randomUUID().toString(), title = "Task ${taskList.size + 1}", description = "new task"))
-            lifecycleScope.launch {
-                val task = Task(id = UUID.randomUUID().toString(), title = "Task ${taskList.size + 1}", description = "new task")
-                tasksRepository.createTask(task)
-                adapter.notifyDataSetChanged()
-            }
+            viewModel.addTask()
         }
-
-        var taskDeleteButton = recyclerView.findViewById<Button>(R.id.delete_button)
 
         adapter.onDeleteClickListener = { task ->
-            lifecycleScope.launch {
-                tasksRepository.deleteTask(task.id)
-                adapter.notifyDataSetChanged()
-            }
+            viewModel.deleteTask(task)
         }
-        /*recyclerView.adapter.onDeleteClickListener = { task ->
-            // Supprimer la tâche
-            taskList.remove(task)
-            recyclerView.adapter.notifyDataSetChanged()*/
-        tasksRepository.taskList.observe(viewLifecycleOwner, Observer {
-            adapter.taskList = it
-            adapter.notifyDataSetChanged()
-        })
+
+        adapter.onUpdateClickListener = { task ->
+            viewModel.editTask(task)
+        }
     }
 
 
     override fun onResume() {
         super.onResume()
+        viewModel.loadTasks(this)
+
+        val imageView = view?.findViewById<ImageView>(R.id.AvatarImage)
+        imageView?.load("https://goo.gl/gEgYUd")
+
+    }
+
+    suspend fun infoChanged()
+    {
         val textView = view?.findViewById<TextView>(R.id.textViewUser)
-        lifecycleScope.launch{
-            tasksRepository.refresh()
-            val userInfo = Api.userService.getInfo().body()
-            textView?.text = userInfo.toString()
-        }
+        val userInfo = Api.userService.getInfo().body()
+        textView?.text = userInfo.toString()
     }
 
 }
