@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.transform.CircleCropTransformation
 import com.example.tdrecyclerview.MainActivity
 import com.example.tdrecyclerview.R
 import com.example.tdrecyclerview.network.Api
@@ -79,6 +80,9 @@ class TaskListFragment : Fragment()
 
         val imageView = view?.findViewById<ImageView>(R.id.AvatarImage)
         imageView?.load("https://goo.gl/gEgYUd")
+        {
+            transformations(CircleCropTransformation())
+        }
 
     }
 
