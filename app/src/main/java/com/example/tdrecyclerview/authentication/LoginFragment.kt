@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -41,7 +42,7 @@ class LoginFragment : Fragment() {
                 fieldPassword.highlightColor = Color.RED
             }else{
                 lifecycleScope.launch {
-                    val token = Api.INSTANCE.userService.login(LoginForm(fieldMail.text.toString(), fieldPassword.text.toString())).body()?.token
+                    val token = Api.INSTANCE.userService.login(LoginForm(fieldMail.text.toString(), fieldPassword.text.toString())).body()?.token ?: Toast.makeText(context, "Can't login !", Toast.LENGTH_LONG).show()
                     getDefaultSharedPreferences(context).edit{
                         putString(SHARED_PREF_TOKEN_KEY, token)
                     }
