@@ -8,8 +8,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:translationX="10dp"
-        android:translationY="10dp"
-        tools:layout_editor_absoluteX="10dp">
+        android:translationY="10dp">
 
         <TextView
             android:id="@+id/textView4"
