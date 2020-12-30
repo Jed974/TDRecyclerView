@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import androidx.preference.PreferenceManager.getDefaultSharedPreferences
 import com.example.tdrecyclerview.MainActivity
@@ -35,6 +36,10 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var cancelButton = view.findViewById<Button>(R.id.cancel_signin_button)
+        cancelButton.setOnClickListener(){
+            findNavController().navigate(R.id.action_loginFragment_to_authenticationFragment)
+        }
         var buttonSignin = view.findViewById<Button>(R.id.signin_button)
         var fieldMail = view.findViewById<EditText>(R.id.email_field)
         var fieldPassword = view.findViewById<EditText>(R.id.pwd_field)

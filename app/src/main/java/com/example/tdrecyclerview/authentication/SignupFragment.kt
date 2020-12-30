@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.edit
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import com.example.tdrecyclerview.MainActivity
 import com.example.tdrecyclerview.network.Api
@@ -31,6 +32,11 @@ class SignupFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var cancelButton = view.findViewById<Button>(R.id.cancel_signup_button)
+        cancelButton.setOnClickListener(){
+            findNavController().navigate(R.id.action_signupFragment_to_authenticationFragment)
+        }
+
         var buttonSignup = view.findViewById<Button>(R.id.signup_button)
         var fieldFirstName = view.findViewById<EditText>(R.id.firstname_field_signup)
         var fieldLastName = view.findViewById<EditText>(R.id.lastname_field_signup)

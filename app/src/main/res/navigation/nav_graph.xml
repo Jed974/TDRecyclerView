@@ -17,9 +17,17 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.tdrecyclerview.authentication.LoginFragment"
-        android:label="LoginFragment" />
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_authenticationFragment"
+            app:destination="@id/authenticationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/signupFragment"
         android:name="com.example.tdrecyclerview.authentication.SignupFragment"
-        android:label="SignupFragment" />
+        android:label="SignupFragment" >
+        <action
+            android:id="@+id/action_signupFragment_to_authenticationFragment"
+            app:destination="@id/authenticationFragment" />
+    </fragment>
 </navigation>
