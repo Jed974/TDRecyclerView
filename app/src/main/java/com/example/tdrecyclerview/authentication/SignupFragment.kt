@@ -35,7 +35,7 @@ class SignupFragment: Fragment() {
         var fieldFirstName = view.findViewById<EditText>(R.id.firstname_field_signup)
         var fieldLastName = view.findViewById<EditText>(R.id.lastname_field_signup)
         var fieldMail = view.findViewById<EditText>(R.id.email_field_signup)
-        var fieldPwd = view.findViewById<EditText>(R.id.pwd_field)
+        var fieldPwd = view.findViewById<EditText>(R.id.pwd_field_signup)
         var fieldPwdConfirm = view.findViewById<EditText>(R.id.pwd_confirm_field_signup)
         buttonSignup.setOnClickListener(){
             var signup = true
