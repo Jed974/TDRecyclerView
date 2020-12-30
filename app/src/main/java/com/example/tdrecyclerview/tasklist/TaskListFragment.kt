@@ -30,7 +30,7 @@ class TaskListFragment : Fragment()
 {
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
 
-    private val userWebService = Api.userService
+    private val userWebService = Api.INSTANCE.userService
 
     //var recyclerView = null;
     val taskList = emptyList<Task>()
@@ -144,7 +144,7 @@ class TaskListFragment : Fragment()
     suspend fun infoChanged()
     {
         val textView = view?.findViewById<TextView>(R.id.textViewUser)
-        val userInfo = Api.userService.getInfo().body()
+        val userInfo = userWebService.getInfo().body()
         textView?.text = userInfo.toString()
     }
 

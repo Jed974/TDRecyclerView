@@ -26,7 +26,7 @@ import java.io.File
 class UserInfoActivity : AppCompatActivity() {
 
     private var imageView: ImageView? = null
-    private val userWebService = Api.userService
+    private val userWebService = Api.INSTANCE.userService
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_info)
