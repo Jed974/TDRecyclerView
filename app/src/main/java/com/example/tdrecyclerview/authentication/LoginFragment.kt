@@ -1,5 +1,6 @@
 package com.example.tdrecyclerview.authentication
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.provider.Settings.Global.putString
@@ -13,9 +14,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.preference.PreferenceManager.getDefaultSharedPreferences
+import com.example.tdrecyclerview.MainActivity
 import com.example.tdrecyclerview.R
 import com.example.tdrecyclerview.network.Api
 import com.example.tdrecyclerview.network.UserService
+import com.example.tdrecyclerview.userinfo.UserInfoActivity
 import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
@@ -45,6 +48,8 @@ class LoginFragment : Fragment() {
                     getDefaultSharedPreferences(context).edit{
                         putString(SHARED_PREF_TOKEN_KEY, token)
                     }
+                    val intent = Intent(activity, MainActivity::class.java)
+                    (activity as AuthenticationActivity).changeActivity(intent)
                 }
             }
         }
