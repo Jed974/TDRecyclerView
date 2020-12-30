@@ -45,10 +45,10 @@
                     android:translationY="5dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/TaskInputText"
+                        android:id="@+id/TaskInputEditTitle"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:paddingTop="1x"
+                        android:paddingTop="1px"
                         android:textAlignment="center"
                         android:textSize="20sp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -61,7 +61,7 @@
                     android:translationY="10dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/TaskInputTextDescription"
+                        android:id="@+id/TaskInputEditDescription"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:paddingTop="1px"
