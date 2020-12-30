@@ -27,12 +27,32 @@ class TaskActivity : AppCompatActivity() {
         val descriptionText = findViewById<EditText>(R.id.TaskInputEditDescription)
         val saveButton = findViewById<Button>(R.id.SaveButton)
         saveButton.setOnClickListener {
-            newTask.title = titleText.text.toString()
-            newTask.description = descriptionText.text.toString()
+            if (titleText.text.toString() != "")
+            {
+                newTask.title = titleText.text.toString()
+            }
+            if (descriptionText.text.toString() != "")
+            {
+                newTask.description = descriptionText.text.toString()
+            }
+
+
             intent.putExtra(TASK_KEY, Json.encodeToString(newTask))
             //println(intent.extras?.get(TASK_KEY))
             setResult(RESULT_OK, intent)
             finish()
+
+        }
+        if (intent.getStringExtra("TASK") != null)
+        {
+            val oldTask = intent!!.getStringExtra("TASK")?.let {
+                Json.decodeFromString<Task>(Task.serializer(),
+                    it
+                )
+            }
+            newTask.id = oldTask?.id.toString()
+            titleText.setText(oldTask?.title)
+            descriptionText.setText(oldTask?.description)
 
         }
 

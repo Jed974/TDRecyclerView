@@ -21,6 +21,7 @@ import com.example.tdrecyclerview.network.Api
 import com.example.tdrecyclerview.userinfo.UserInfoActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.example.tdrecyclerview.task.TaskActivity
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 class TaskListFragment : Fragment()
@@ -37,6 +38,11 @@ class TaskListFragment : Fragment()
 
     private val tasksRepository = TasksRepository()
 
+    enum class Purpose{
+        Add,
+        Edit
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -45,7 +51,7 @@ class TaskListFragment : Fragment()
                 val data: Intent? = result.data
                 //println(data)
                 //doSomeOperations()
-                addTaskFromResult(data)
+                handleTaskFromResult(data)
             }
         }
     }
@@ -76,6 +82,7 @@ class TaskListFragment : Fragment()
         addTask.setOnClickListener {
             //viewModel.addTask()
             val intent = Intent(activity, TaskActivity::class.java)
+            intent.putExtra("Purpose", Purpose.Add)
             resultLauncher.launch(intent)
             //(activity as MainActivity).changeActivity(intent)
         }
@@ -85,7 +92,11 @@ class TaskListFragment : Fragment()
         }
 
         adapter.onUpdateClickListener = { task ->
-            viewModel.editTask(task)
+            //viewModel.editTask(task)
+            val intent = Intent(activity, TaskActivity::class.java)
+            intent.putExtra("Purpose", Purpose.Edit)
+            intent.putExtra("TASK", Json.encodeToString(task))
+            resultLauncher.launch(intent)
         }
 
         adapter.onLongClickListener = {
@@ -131,7 +142,7 @@ class TaskListFragment : Fragment()
         super.onActivityResult(requestCode, resultCode, data)
 
     }*/
-    fun addTaskFromResult(data: Intent?)
+    fun handleTaskFromResult(data: Intent?)
     {
         val task = data!!.getStringExtra(TaskActivity.TASK_KEY)?.let {
             Json.decodeFromString<Task>(Task.serializer(),
@@ -140,7 +151,15 @@ class TaskListFragment : Fragment()
         }
         println("hello")
         if (task != null) {
-            viewModel.addTask(task)
+            if (data.getSerializableExtra("Purpose") == Purpose.Add)
+            {
+                viewModel.addTask(task)
+            }
+            if (data.getSerializableExtra("Purpose") == Purpose.Edit)
+            {
+                viewModel.editTask(task)
+            }
         }
+        onResume()
     }
 }
