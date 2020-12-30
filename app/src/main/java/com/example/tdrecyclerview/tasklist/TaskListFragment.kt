@@ -11,6 +11,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -21,12 +22,15 @@ import com.example.tdrecyclerview.network.Api
 import com.example.tdrecyclerview.userinfo.UserInfoActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.example.tdrecyclerview.task.TaskActivity
+import kotlinx.coroutines.launch
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 class TaskListFragment : Fragment()
 {
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+
+    private val userWebService = Api.userService
 
     //var recyclerView = null;
     val taskList = emptyList<Task>()
@@ -124,10 +128,16 @@ class TaskListFragment : Fragment()
         viewModel.loadTasks(this)
 
         val imageView = view?.findViewById<ImageView>(R.id.AvatarImage)
-        imageView?.load("https://goo.gl/gEgYUd")
-        {
-            transformations(CircleCropTransformation())
+        //imageView?.load("https://goo.gl/gEgYUd")
+        lifecycleScope.launch {
+            val userInfo = userWebService.getInfo()
+            if (userInfo.isSuccessful) {
+                imageView?.load(userInfo.body()?.avatar){
+                    transformations(CircleCropTransformation())
+                }
+            }
         }
+
 
     }
 
