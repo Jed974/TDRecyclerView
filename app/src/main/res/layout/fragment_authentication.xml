@@ -13,21 +13,28 @@
 
         <TextView
             android:id="@+id/textViewTitleApp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Task Manager" />
+            android:text="Task Manager"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/welcome_signin_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:text="Sign In" />
 
         <Button
             android:id="@+id/welcome_signup_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign Up" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Create an account" />
 
     </LinearLayout>
 
