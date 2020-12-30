@@ -1,8 +1,8 @@
 package task
 
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 
-class TaskActivity : Fragment() {
+class TaskActivity : AppCompatActivity() {
     companion object {
         const val ADD_TASK_REQUEST_CODE = 666
     }
