@@ -50,11 +50,12 @@ class LoginFragment : Fragment() {
                        getDefaultSharedPreferences(context).edit {
                             putString(SHARED_PREF_TOKEN_KEY, token)
                         }
+                        val intent = Intent(activity, MainActivity::class.java)
+                        (activity as AuthenticationActivity).changeActivity(intent)
                     }else{
                         Toast.makeText(context, "Can't login !", Toast.LENGTH_LONG).show()
                     }
-                    val intent = Intent(activity, MainActivity::class.java)
-                    (activity as AuthenticationActivity).changeActivity(intent)
+
                 }
             }
         }

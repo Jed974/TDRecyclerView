@@ -1,5 +1,6 @@
 package com.example.tdrecyclerview.authentication
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import android.widget.Toast
 import androidx.core.content.edit
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
+import com.example.tdrecyclerview.MainActivity
 import com.example.tdrecyclerview.network.Api
 import kotlinx.coroutines.launch
 
@@ -79,6 +81,8 @@ class SignupFragment: Fragment() {
                         PreferenceManager.getDefaultSharedPreferences(context).edit {
                             putString(SHARED_PREF_TOKEN_KEY, token)
                         }
+                        val intent = Intent(activity, MainActivity::class.java)
+                        (activity as AuthenticationActivity).changeActivity(intent)
                     }else{
                         Toast.makeText(context, "Can't sign up !", Toast.LENGTH_LONG).show()
                     }
