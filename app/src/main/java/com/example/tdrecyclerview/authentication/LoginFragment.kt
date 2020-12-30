@@ -1,11 +1,20 @@
 package com.example.tdrecyclerview.authentication
 
+import android.graphics.Color
 import android.os.Bundle
+import android.provider.Settings.Global.putString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.preference.PreferenceManager
 import com.example.tdrecyclerview.R
+import com.example.tdrecyclerview.network.Api
+import com.example.tdrecyclerview.network.UserService
+import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
 
@@ -17,4 +26,26 @@ class LoginFragment : Fragment() {
 
         return rootView
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        var buttonSignin = view.findViewById<Button>(R.id.signin_button)
+        var fieldMail = view.findViewById<EditText>(R.id.email_field)
+        var fieldPassword = view.findViewById<EditText>(R.id.pwd_field)
+        buttonSignin.setOnClickListener(){
+            if(fieldMail.text.toString().equals("")){
+                fieldMail.highlightColor = Color.RED
+            }else if(fieldPassword.text.toString().equals("")){
+                fieldPassword.highlightColor = Color.RED
+            }else{
+                lifecycleScope.launch {
+                    val token = Api.userService.login(LoginForm(fieldMail.text.toString(), fieldPassword.text.toString())).body()
+                    PreferenceManager.getDefaultSharedPreferences(context).edit {
+                        putString(SHARED_PREF_TOKEN_KEY, token)
+                    }
+                }
+            }
+        }
+    }
+
 }
