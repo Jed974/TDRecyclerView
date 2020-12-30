@@ -29,7 +29,9 @@
 
         <activity android:name=".userinfo.UserInfoActivity"></activity>
         <activity android:name=".task.TaskActivity"></activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity">
+
+        </activity>
         <activity android:name=".authentication.AuthenticationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
