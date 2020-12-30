@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
+import androidx.preference.PreferenceManager.getDefaultSharedPreferences
 import com.example.tdrecyclerview.R
 import com.example.tdrecyclerview.network.Api
 import com.example.tdrecyclerview.network.UserService
@@ -39,8 +41,8 @@ class LoginFragment : Fragment() {
                 fieldPassword.highlightColor = Color.RED
             }else{
                 lifecycleScope.launch {
-                    val token = Api.userService.login(LoginForm(fieldMail.text.toString(), fieldPassword.text.toString())).body()
-                    PreferenceManager.getDefaultSharedPreferences(context).edit {
+                    val token = Api.INSTANCE.userService.login(LoginForm(fieldMail.text.toString(), fieldPassword.text.toString())).body()?.token
+                    getDefaultSharedPreferences(context).edit{
                         putString(SHARED_PREF_TOKEN_KEY, token)
                     }
                 }
