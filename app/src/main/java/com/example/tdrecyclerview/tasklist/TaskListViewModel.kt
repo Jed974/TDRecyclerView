@@ -4,7 +4,7 @@ import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import java.util.*
 
-// Le ViewModel met à jour la liste de task qui est une LiveData
+// Le ViewModel met à jour la liste de com.example.tdrecyclerview.task qui est une LiveData
 class TaskListViewModel(private var adapter: TaskListAdapter): ViewModel() {
     private val repository = TasksRepository()
     private val _taskList = MutableLiveData<List<Task>>()
@@ -38,7 +38,7 @@ class TaskListViewModel(private var adapter: TaskListAdapter): ViewModel() {
     fun addTask()
     {
         viewModelScope.launch {
-            val task = Task(id = UUID.randomUUID().toString(), title = "New Task", description = "new task")
+            val task = Task(id = UUID.randomUUID().toString(), title = "New Task", description = "new com.example.tdrecyclerview.task")
 
             var newTask: Task
             val fetchedTasks = repository.createTask(task)
@@ -50,6 +50,21 @@ class TaskListViewModel(private var adapter: TaskListAdapter): ViewModel() {
             adapter.notifyDataSetChanged()
         }
     }
+    fun addTask(task: Task)
+    {
+        viewModelScope.launch {
+
+            var newTask: Task
+            val fetchedTasks = repository.createTask(task)
+            // on modifie la valeur encapsulée, ce qui va notifier ses Observers et donc déclencher leur callback
+            newTask = fetchedTasks!!
+            val editableList = _taskList.value.orEmpty().toMutableList()
+            editableList.add(editableList.size, newTask)
+            _taskList.value = editableList
+            adapter.notifyDataSetChanged()
+        }
+    }
+
     fun editTask(task: Task)
     {
         viewModelScope.launch {

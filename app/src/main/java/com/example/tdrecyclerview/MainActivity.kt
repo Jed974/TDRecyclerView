@@ -13,11 +13,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun changeActivity(java: Class<UserInfoActivity>)
+    fun changeActivity(intent: Intent)
     {
-
-        val intent = Intent(this, java)
         startActivity(intent)
 
     }
+
 }

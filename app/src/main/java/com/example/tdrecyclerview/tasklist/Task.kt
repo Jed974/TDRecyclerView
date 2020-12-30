@@ -4,11 +4,11 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Task(
+data class Task (
         @SerialName("id")
         val id : String,
         @SerialName("title")
-        val title : String,
+        var title : String,
         @SerialName("description")
-        val description : String
+        var description : String
 )
