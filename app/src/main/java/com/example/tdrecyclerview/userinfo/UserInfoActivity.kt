@@ -46,8 +46,7 @@ class UserInfoActivity : AppCompatActivity() {
         }
         val quitButton = findViewById<Button>(R.id.QuitUserInfoButton)
         quitButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            finish()
 
         }
 
