@@ -38,7 +38,7 @@ class UserInfoActivity : AppCompatActivity() {
 
         }
         val choosePictureButton = findViewById<Button>(R.id.UploadImageButton)
-        takePictureButton.setOnClickListener {
+        choosePictureButton.setOnClickListener {
             askFilePermissionAndOpenBrowser()
 
         }
