@@ -43,6 +43,10 @@ class TaskActivity : AppCompatActivity() {
             finish()
 
         }
+        val cancelButton = findViewById<Button>(R.id.cancel_addtask_button)
+        cancelButton.setOnClickListener(){
+            finish()
+        }
         if (intent.getStringExtra("TASK") != null)
         {
             val oldTask = intent!!.getStringExtra("TASK")?.let {
