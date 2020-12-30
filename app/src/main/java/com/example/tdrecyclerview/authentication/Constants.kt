@@ -1,5 +1,4 @@
 package com.example.tdrecyclerview.authentication
 
 const val SHARED_PREF_TOKEN_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNzcsImV4cCI6MTYzODg4NDkzMH0.PNXfmG7t8QC1kp9YCVkQ8QbpkFdcOQnDeeBYsOCWTRc"
-const val JALIK_PREF_TOKEN_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0MTQsImV4cCI6MTY0MDg5MjM1MH0.TNAa0rJ9bsgsSL3p7atv_sGHu5M7XxjPDLF0Dr0AkfQ"
 

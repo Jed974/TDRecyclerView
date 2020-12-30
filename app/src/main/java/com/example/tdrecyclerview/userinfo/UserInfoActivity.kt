@@ -1,6 +1,7 @@
 package com.example.tdrecyclerview.userinfo
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.example.tdrecyclerview.BuildConfig
+import com.example.tdrecyclerview.MainActivity
 
 import com.example.tdrecyclerview.R
 import com.example.tdrecyclerview.network.Api
@@ -40,6 +42,12 @@ class UserInfoActivity : AppCompatActivity() {
         val choosePictureButton = findViewById<Button>(R.id.UploadImageButton)
         choosePictureButton.setOnClickListener {
             askFilePermissionAndOpenBrowser()
+
+        }
+        val quitButton = findViewById<Button>(R.id.QuitUserInfoButton)
+        quitButton.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
 
         }
 

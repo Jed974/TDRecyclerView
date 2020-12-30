@@ -145,7 +145,7 @@ class TaskListFragment : Fragment()
     {
         val textView = view?.findViewById<TextView>(R.id.textViewUser)
         val userInfo = userWebService.getInfo().body()
-        textView?.text = userInfo.toString()
+        textView?.text = "Bonjour "  + userInfo?.firstName + " " + userInfo?.lastName
     }
 
     /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

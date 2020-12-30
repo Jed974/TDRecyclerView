@@ -15,6 +15,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <Button
+            android:id="@+id/QuitUserInfoButton"
+            android:layout_width="59dp"
+            android:layout_height="wrap_content"
+            app:icon="@android:drawable/btn_dialog" />
+
         <ImageView
             android:id="@+id/UserImage"
             android:layout_width="match_parent"
