@@ -52,8 +52,7 @@
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textEmailAddress"
-            tools:text="my.mail@domain.com" />
+            android:inputType="textEmailAddress" />
 
         <TextView
             android:id="@+id/textView3signup"
@@ -68,8 +67,7 @@
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPassword"
-            tools:text="password" />
+            android:inputType="textPassword" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -78,7 +76,7 @@
 
             <Button
                 android:id="@+id/signup_button"
-                android:layout_width="150dpp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Sign Up" />
