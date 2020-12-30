@@ -71,6 +71,7 @@ class TaskListFragment : Fragment()
             val sendIntent : Intent = Intent().apply {
                 action = Intent.ACTION_SEND
                 putExtra(Intent.EXTRA_TEXT, "**" + it.title + "**: " + it.description)
+
                 type = "text/plain"
             }
             val shareIntent = Intent.createChooser(sendIntent, null)
