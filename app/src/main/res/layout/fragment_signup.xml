@@ -69,6 +69,21 @@
             android:ems="10"
             android:inputType="textPassword" />
 
+        <TextView
+            android:id="@+id/textView3signup2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Confirm Password"
+            android:textSize="16sp"
+            android:translationY="5dp" />
+
+        <EditText
+            android:id="@+id/pwd_confirm_field_signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

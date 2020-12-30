@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -45,8 +46,12 @@ class LoginFragment : Fragment() {
             }else{
                 lifecycleScope.launch {
                     val token = Api.INSTANCE.userService.login(LoginForm(fieldMail.text.toString(), fieldPassword.text.toString())).body()?.token
-                    getDefaultSharedPreferences(context).edit{
-                        putString(SHARED_PREF_TOKEN_KEY, token)
+                    if(token != null) {
+                       getDefaultSharedPreferences(context).edit {
+                            putString(SHARED_PREF_TOKEN_KEY, token)
+                        }
+                    }else{
+                        Toast.makeText(context, "Can't login !", Toast.LENGTH_LONG).show()
                     }
                     val intent = Intent(activity, MainActivity::class.java)
                     (activity as AuthenticationActivity).changeActivity(intent)
