@@ -42,9 +42,13 @@ class LoginFragment : Fragment() {
                 fieldPassword.highlightColor = Color.RED
             }else{
                 lifecycleScope.launch {
-                    val token = Api.INSTANCE.userService.login(LoginForm(fieldMail.text.toString(), fieldPassword.text.toString())).body()?.token ?: Toast.makeText(context, "Can't login !", Toast.LENGTH_LONG).show()
-                    getDefaultSharedPreferences(context).edit{
-                        putString(SHARED_PREF_TOKEN_KEY, token)
+                    val token = Api.INSTANCE.userService.login(LoginForm(fieldMail.text.toString(), fieldPassword.text.toString())).body()?.token
+                    if(token != null) {
+                       getDefaultSharedPreferences(context).edit {
+                            putString(SHARED_PREF_TOKEN_KEY, token)
+                        }
+                    }else{
+                        Toast.makeText(context, "Can't login !", Toast.LENGTH_LONG).show()
                     }
                 }
             }
