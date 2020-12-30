@@ -1,0 +1,4 @@
+package com.example.tdrecyclerview.authentication
+
+const val SHARED_PREF_TOKEN_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNzcsImV4cCI6MTYzODg4NDkzMH0.PNXfmG7t8QC1kp9YCVkQ8QbpkFdcOQnDeeBYsOCWTRc"
+

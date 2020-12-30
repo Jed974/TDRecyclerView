@@ -1,5 +1,11 @@
 package com.example.tdrecyclerview.network
 
+import android.content.Context
+import android.os.strictmode.InstanceCountViolation
+import android.provider.Settings.System.putString
+import androidx.core.content.edit
+import androidx.preference.PreferenceManager
+import com.example.tdrecyclerview.authentication.SHARED_PREF_TOKEN_KEY
 import com.example.tdrecyclerview.tasklist.TasksWebService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
@@ -7,12 +13,17 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 
-object Api {
+class Api(private val context: Context) {
 
-    // constantes qui serviront à faire les requêtes
-    private const val BASE_URL = "https://android-tasks-api.herokuapp.com/api/"
-    private const val TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNzcsImV4cCI6MTYzODg4NDkzMH0.PNXfmG7t8QC1kp9YCVkQ8QbpkFdcOQnDeeBYsOCWTRc"
+    companion object{
+        // constantes qui serviront à faire les requêtes
+        private const val BASE_URL = "https://android-tasks-api.herokuapp.com/api/"
+        lateinit var INSTANCE: Api
+    }
 
+    fun GetToken(): String? {
+        return PreferenceManager.getDefaultSharedPreferences(context).getString(SHARED_PREF_TOKEN_KEY, "")
+    }
     val userService: UserService by lazy {
         retrofit.create(UserService::class.java)
     }
@@ -37,7 +48,7 @@ object Api {
             .addInterceptor { chain ->
                 // intercepteur qui ajoute le `header` d'authentification avec votre token:
                 val newRequest = chain.request().newBuilder()
-                    .addHeader("Authorization", "Bearer $TOKEN")
+                    .addHeader("Authorization", "Bearer ${GetToken()}")
                     .build()
                 chain.proceed(newRequest)
             }
