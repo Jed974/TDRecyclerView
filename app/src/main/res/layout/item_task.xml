@@ -27,47 +27,33 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/TaskTitle"
+                <TextView
+                    android:id="@+id/TitleTextView"
                     android:layout_width="245dp"
                     android:layout_height="50dp"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
                     android:translationX="5dp"
-                    android:translationY="5dp">
+                    android:translationY="5dp" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/TaskInputText"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:paddingTop="1x"
-                        android:textAlignment="center"
-                        android:textSize="20sp" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/TaskDescription"
+                <TextView
+                    android:id="@+id/DescriptionTextView"
                     android:layout_width="245dp"
                     android:layout_height="50dp"
+                    android:textAlignment="center"
                     android:translationX="5dp"
-                    android:translationY="10dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/TaskInputTextDescription"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:paddingTop="1px"
-                        android:textAlignment="center"
-                        android:textSize="14sp" />
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:translationY="10dp" />
 
             </LinearLayout>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/UpdateTaskButton"
+                android:id="@+id/EditTaskButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:clickable="true"
-                app:srcCompat="@android:drawable/ic_menu_upload" />
+                app:srcCompat="@android:drawable/ic_menu_edit" />
 
         </LinearLayout>
 
@@ -75,7 +61,8 @@
             android:id="@+id/DeleteTaskButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button"
+            android:text="Delete"
+            android:translationX="5dp"
             app:icon="@android:drawable/ic_menu_delete" />
 
     </LinearLayout>

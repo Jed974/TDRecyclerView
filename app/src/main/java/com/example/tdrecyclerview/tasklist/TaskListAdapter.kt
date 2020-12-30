@@ -21,12 +21,12 @@ class TaskListAdapter() : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>()
 
 
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(taskTitle: String) {
+        fun bind(task : Task) {
             val apply = itemView.apply { // `apply {}` permet d'éviter de répéter `itemView.*`
-                // TODO: afficher les données et attacher les listeners aux différentes vues de notre [itemView]
-                var taskTextView = findViewById<TextInputEditText>(R.id.TaskInputText)
-                taskTextView.setText(taskTitle)
-
+                var taskTextView = findViewById<TextView>(R.id.TitleTextView)
+                taskTextView.text = task.title
+                var taskDescriptionView = findViewById<TextView>(R.id.DescriptionTextView)
+                taskDescriptionView.text = task.description
 
             }
         }
@@ -39,12 +39,12 @@ class TaskListAdapter() : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>()
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        holder.bind(taskList[position].title + " ("+taskList[position].description+")")
+        holder.bind(taskList[position])
         var deleteTaskButton = holder.itemView.findViewById<Button>(R.id.DeleteTaskButton)
         deleteTaskButton.setOnClickListener {
             onDeleteClickListener?.invoke(taskList[position])
         }
-        var updateTaskButton = holder.itemView.findViewById<FloatingActionButton>(R.id.UpdateTaskButton)
+        var updateTaskButton = holder.itemView.findViewById<FloatingActionButton>(R.id.EditTaskButton)
         updateTaskButton.setOnClickListener {
             onUpdateClickListener?.invoke(taskList[position])
         }
