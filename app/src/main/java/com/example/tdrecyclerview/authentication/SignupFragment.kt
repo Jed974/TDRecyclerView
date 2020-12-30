@@ -79,7 +79,7 @@ class SignupFragment: Fragment() {
                     )).body()?.token
                     if(token != null) {
                         PreferenceManager.getDefaultSharedPreferences(context).edit {
-                            putString(JALIK_PREF_TOKEN_KEY, token)
+                            putString(SHARED_PREF_TOKEN_KEY, token)
                         }
                         val intent = Intent(activity, MainActivity::class.java)
                         (activity as AuthenticationActivity).changeActivity(intent)

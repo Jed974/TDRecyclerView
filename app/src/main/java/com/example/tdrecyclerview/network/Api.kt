@@ -5,7 +5,7 @@ import android.os.strictmode.InstanceCountViolation
 import android.provider.Settings.System.putString
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
-import com.example.tdrecyclerview.authentication.JALIK_PREF_TOKEN_KEY
+import com.example.tdrecyclerview.authentication.SHARED_PREF_TOKEN_KEY
 import com.example.tdrecyclerview.tasklist.TasksWebService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
@@ -22,7 +22,7 @@ class Api(private val context: Context) {
     }
 
     fun GetToken(): String? {
-        return PreferenceManager.getDefaultSharedPreferences(context).getString(JALIK_PREF_TOKEN_KEY, "")
+        return PreferenceManager.getDefaultSharedPreferences(context).getString(SHARED_PREF_TOKEN_KEY, "")
     }
     val userService: UserService by lazy {
         retrofit.create(UserService::class.java)

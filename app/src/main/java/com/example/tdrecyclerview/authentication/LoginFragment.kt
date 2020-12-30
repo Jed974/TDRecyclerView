@@ -48,7 +48,7 @@ class LoginFragment : Fragment() {
                     val token = Api.INSTANCE.userService.login(LoginForm(fieldMail.text.toString(), fieldPassword.text.toString())).body()?.token
                     if(token != null) {
                        getDefaultSharedPreferences(context).edit {
-                            putString(JALIK_PREF_TOKEN_KEY, token)
+                            putString(SHARED_PREF_TOKEN_KEY, token)
                         }
                         val intent = Intent(activity, MainActivity::class.java)
                         (activity as AuthenticationActivity).changeActivity(intent)
