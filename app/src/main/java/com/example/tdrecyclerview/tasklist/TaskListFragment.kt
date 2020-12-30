@@ -1,5 +1,6 @@
 package com.example.tdrecyclerview.tasklist
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -66,6 +67,16 @@ class TaskListFragment : Fragment()
             viewModel.editTask(task)
         }
 
+        adapter.onLongClickListener = {
+            val sendIntent : Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, "**" + it.title + "**: " + it.description)
+                type = "text/plain"
+            }
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
+            true
+        }
         val imageView = view?.findViewById<ImageView>(R.id.AvatarImage)
         imageView.setOnClickListener {
             (activity as MainActivity).changeActivity(UserInfoActivity::class.java)

@@ -18,7 +18,7 @@ class TaskListAdapter() : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>()
     // Déclaration de la variable lambda dans l'adapter:
     var onDeleteClickListener: ((Task) -> Unit)? = null
     var onUpdateClickListener: ((Task) -> Unit)? = null
-
+    var onLongClickListener: ((Task) -> Boolean)? = null
 
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(task : Task) {
@@ -27,7 +27,9 @@ class TaskListAdapter() : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>()
                 taskTextView.text = task.title
                 var taskDescriptionView = findViewById<TextView>(R.id.DescriptionTextView)
                 taskDescriptionView.text = task.description
-
+                itemView.setOnLongClickListener {
+                    onLongClickListener?.invoke(task) ?: false
+                }
             }
         }
     }
