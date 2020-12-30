@@ -2,6 +2,7 @@ package com.example.tdrecyclerview.network
 
 import com.example.tdrecyclerview.authentication.LoginForm
 import com.example.tdrecyclerview.authentication.LoginResponse
+import com.example.tdrecyclerview.authentication.SignupForm
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -16,4 +17,7 @@ interface UserService {
 
     @POST("users/login")
     suspend fun login(@Body user: LoginForm) : Response<LoginResponse>
+
+    @POST("users/sign_up")
+    suspend fun signup(@Body user: SignupForm) : Response<LoginResponse>
 }
