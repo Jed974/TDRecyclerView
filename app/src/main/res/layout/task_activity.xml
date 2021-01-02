@@ -33,25 +33,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/TaskEditTitle"
-                    android:layout_width="245dp"
-                    android:layout_height="50dp"
-                    android:translationX="5dp"
-                    android:translationY="5dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/TaskInputEditTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:paddingTop="1px"
-                        android:textAlignment="center"
-                        android:textSize="20sp" />
-                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/TaskEditDescription"
@@ -67,7 +51,84 @@
                         android:paddingTop="1px"
                         android:textAlignment="center"
                         android:textSize="14sp" />
+
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/TaskEditTitle"
+                    android:layout_width="245dp"
+                    android:layout_height="50dp"
+                    android:translationX="5dp"
+                    android:translationY="15dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/TaskInputEditTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:paddingTop="1px"
+                        android:textAlignment="center"
+                        android:textSize="20sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal"
+                    android:translationX="5dp"
+                    android:translationY="20dp">
+
+                    <EditText
+                        android:id="@+id/inputDateTask"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="date" />
+
+                    <Button
+                        android:id="@+id/buttonSetDate"
+                        style="@style/Widget.AppCompat.Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:insetLeft="-5dp"
+                        android:insetRight="-5dp"
+                        android:insetTop="0sp"
+                        android:text="Choose Date"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal"
+                    android:translationX="5dp"
+                    android:translationY="10dp">
+
+                    <EditText
+                        android:id="@+id/inputTimeTask"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="time" />
+
+                    <Button
+                        android:id="@+id/buttonSetTime"
+                        style="@style/Widget.AppCompat.Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:insetLeft="-5dp"
+                        android:insetRight="-5dp"
+                        android:insetTop="0sp"
+                        android:text="Choose Time"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
