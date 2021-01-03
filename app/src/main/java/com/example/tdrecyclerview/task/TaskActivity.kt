@@ -136,7 +136,8 @@ class TaskActivity : AppCompatActivity() {
                     year = c.get(Calendar.YEAR)
                 }
             }
-            val dialog = DatePickerDialog(applicationContext,
+
+            val dialog = DatePickerDialog(this,
                 DatePickerDialog.OnDateSetListener(){
                     view, y, m, d -> dateText.setText("%02d".format(d)+"-" + "%02d".format(m) + "-" + "%04d".format(y))
                 },
@@ -164,7 +165,7 @@ class TaskActivity : AppCompatActivity() {
                     minute = c.get(Calendar.MINUTE)
                 }
             }
-            val dialog = TimePickerDialog(applicationContext,
+            val dialog = TimePickerDialog(this,
                 TimePickerDialog.OnTimeSetListener(){
                     v, h, m -> timeText.setText("%02d".format(h) + ":" + "%02d".format(m))
                 },
@@ -173,12 +174,12 @@ class TaskActivity : AppCompatActivity() {
         }
 
         val notificationManager = ContextCompat.getSystemService(
-            applicationContext,
+            this,
             NotificationManager::class.java
         ) as NotificationManager
 
         notificationManager.sendNotification(
-            applicationContext.getText(R.string.task_due).toString(),
+            this.getText(R.string.task_due).toString(),
             applicationContext
         )
         //println("hello")
