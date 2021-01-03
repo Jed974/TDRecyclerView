@@ -1,6 +1,8 @@
 package com.example.tdrecyclerview.tasklist
 
 import android.content.Intent
+import android.icu.text.SimpleDateFormat
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,7 @@ import android.widget.TextView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -68,6 +71,7 @@ class TaskListFragment : Fragment()
         return rootView
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
@@ -106,7 +110,10 @@ class TaskListFragment : Fragment()
         adapter.onLongClickListener = {
             val sendIntent : Intent = Intent().apply {
                 action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, "**" + it.title + "**: " + it.description)
+                if(it.date != null)
+                    putExtra(Intent.EXTRA_TEXT, "**" + it.title + "** *("+ SimpleDateFormat("on dd/MM/yyyy at hh:mm").format(it.date)+")*: " + it.description)
+                else
+                    putExtra(Intent.EXTRA_TEXT, "**" + it.title + "** : " + it.description)
 
                 type = "text/plain"
             }
