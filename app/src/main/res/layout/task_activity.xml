@@ -38,6 +38,22 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/TaskEditTitle"
+                    android:layout_width="245dp"
+                    android:layout_height="50dp"
+                    android:translationX="5dp"
+                    android:translationY="15dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/TaskInputEditTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:paddingTop="1px"
+                        android:textAlignment="center"
+                        android:textSize="20sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/TaskEditDescription"
                     android:layout_width="245dp"
                     android:layout_height="50dp"
@@ -52,22 +68,6 @@
                         android:textAlignment="center"
                         android:textSize="14sp" />
 
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/TaskEditTitle"
-                    android:layout_width="245dp"
-                    android:layout_height="50dp"
-                    android:translationX="5dp"
-                    android:translationY="15dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/TaskInputEditTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:paddingTop="1px"
-                        android:textAlignment="center"
-                        android:textSize="20sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout
