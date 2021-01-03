@@ -34,7 +34,7 @@ class AuthenticationFragment : Fragment() {
         var signupButton = view.findViewById<Button>(R.id.welcome_signup_button)
 
         loginButton.setOnClickListener {
-            println("hello")
+            //println("hello")
             findNavController().navigate(R.id.action_authenticationFragment_to_loginFragment)
         }
 

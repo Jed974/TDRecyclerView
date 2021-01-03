@@ -77,6 +77,7 @@ class TaskActivity : AppCompatActivity() {
             applicationContext.getText(R.string.task_due).toString(),
             applicationContext
         )
+        //println("hello")
 
     }
 

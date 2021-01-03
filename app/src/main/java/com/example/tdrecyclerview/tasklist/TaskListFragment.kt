@@ -159,7 +159,7 @@ class TaskListFragment : Fragment()
                 it
             )
         }
-        println("hello")
+        //println("hello")
         if (task != null) {
             if (data.getSerializableExtra("Purpose") == Purpose.Add)
             {
