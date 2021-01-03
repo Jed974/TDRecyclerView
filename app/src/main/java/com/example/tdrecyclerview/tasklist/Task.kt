@@ -13,7 +13,7 @@ data class Task (
         var title : String,
         @SerialName("description")
         var description : String,
-        @SerialName("date")
+        @SerialName("due_date")
         @Serializable(with = DateSerializer::class)
         var date : Date
 )
