@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tdrecyclerview.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
+import java.util.*
 
 class TaskListAdapter() : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>()
 {
@@ -38,7 +39,7 @@ class TaskListAdapter() : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>()
                     taskDateView.text = "No date"
                 var taskTimeView = findViewById<TextView>(R.id.TimeTextViewItem)
                 if(task.date != null)
-                    taskTimeView.text = SimpleDateFormat("hh:mm").format(task.date)
+                    taskTimeView.text = SimpleDateFormat("hh:mm", Locale.FRENCH).format(task.date)
                 else
                     taskTimeView.text = "No time"
                 itemView.setOnLongClickListener {
