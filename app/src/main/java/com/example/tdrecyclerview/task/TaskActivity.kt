@@ -103,6 +103,17 @@ class TaskActivity : AppCompatActivity() {
             var calendar =Calendar.getInstance()
             calendar.time = newDate
             alarmManager.setExact(AlarmManager.RTC_WAKEUP,  calendar.timeInMillis , pendingIntent)
+
+            // add call to sendNotification
+            val notificationManager = ContextCompat.getSystemService(
+                this,
+                NotificationManager::class.java
+            ) as NotificationManager
+
+            notificationManager.sendNotification(
+                "Task : '" + titleText.text.toString() +"' created",
+                this
+            )
             //println("notification")
 
             finish()

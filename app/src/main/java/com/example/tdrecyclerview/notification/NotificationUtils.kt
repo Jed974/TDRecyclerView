@@ -46,12 +46,12 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         .bigLargeIcon(null)*/
 
     // add snooze action
-    /*val snoozeIntent = Intent(applicationContext, SnoozeReceiver::class.java)
+    val snoozeIntent = Intent(applicationContext, SnoozeReceiver::class.java)
     val snoozePendingIntent: PendingIntent = PendingIntent.getBroadcast(
         applicationContext,
         REQUEST_CODE,
         snoozeIntent,
-        FLAGS)*/
+        FLAGS)
 
     //val myLogo = (ResourcesCompat.getDrawable(applicationContext.resources, R.drawable.ic_stat_name, null) as VectorDrawable).toBitmap()
 
@@ -77,11 +77,11 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         //.setLargeIcon(eggImage)
 
         // add snooze action
-        /*.addAction(
-            //R.drawable.ic_baseline_create_24,
-            applicationContext.getString(R.string.snooze),
+        .addAction(
+            R.drawable.material_ic_calendar_black_24dp,
+            applicationContext.getString(R.string.done),
             snoozePendingIntent
-        )*/
+        )
 
         // set priority
         //.setPriority(NotificationCompat.PRIORITY_HIGH)

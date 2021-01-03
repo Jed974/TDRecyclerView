@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">TDRecyclerView</string>
     <string name="notification_channel_id" translatable="false">egg_channel</string>
-    <string name="notification_title">Task due right now</string>
-    <string name="snooze">Snooze</string>
+    <string name="notification_title">Task Manager App</string>
+    <string name="done">Mark task as done</string>
     <string name="task_due">Your task is due now !</string>
 </resources>
