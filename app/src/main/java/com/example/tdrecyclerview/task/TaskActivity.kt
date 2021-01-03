@@ -1,11 +1,17 @@
 package com.example.tdrecyclerview.task
 
+import android.app.AlarmManager
+import android.app.NotificationManager
+import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.tdrecyclerview.R
+import com.example.tdrecyclerview.notification.AlarmReceiver
+import com.example.tdrecyclerview.notification.sendNotification
 import com.example.tdrecyclerview.tasklist.Task
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -19,7 +25,7 @@ class TaskActivity : AppCompatActivity() {
         const val RESULT_OK = 100
     }
     // Instanciation d'un nouvel objet [Task]
-    var newTask = Task(id = UUID.randomUUID().toString(), title = "New Task !", description = "New Description")
+    var newTask = Task(id = UUID.randomUUID().toString(), title = "New Task !", description = "New Description", date = Date())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.task_activity)
@@ -61,6 +67,16 @@ class TaskActivity : AppCompatActivity() {
         }
 
 
+
+        val notificationManager = ContextCompat.getSystemService(
+            applicationContext,
+            NotificationManager::class.java
+        ) as NotificationManager
+
+        notificationManager.sendNotification(
+            applicationContext.getText(R.string.task_due).toString(),
+            applicationContext
+        )
 
     }
 
