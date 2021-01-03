@@ -1,12 +1,10 @@
 package com.example.tdrecyclerview.task
 
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
+import android.app.*
 import android.icu.text.SimpleDateFormat
 import android.icu.util.GregorianCalendar
 import android.os.Build
-import android.app.AlarmManager
-import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -89,7 +87,7 @@ class TaskActivity : AppCompatActivity() {
             //println(intent.extras?.get(TASK_KEY))
             setResult(RESULT_OK, intent)
 
-            val notificationManager = ContextCompat.getSystemService(
+            /*val notificationManager = ContextCompat.getSystemService(
                 this,
                 NotificationManager::class.java
             ) as NotificationManager
@@ -97,7 +95,12 @@ class TaskActivity : AppCompatActivity() {
             notificationManager.sendNotification(
                 this.getText(R.string.task_due).toString(),
                 applicationContext
-            )
+            )*/
+
+            val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val intent = Intent(this, AlarmReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, newDate.time , pendingIntent)
             //println("notification")
 
             finish()
