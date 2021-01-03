@@ -5,6 +5,9 @@ import android.app.TimePickerDialog
 import android.icu.text.SimpleDateFormat
 import android.icu.util.GregorianCalendar
 import android.os.Build
+import android.app.AlarmManager
+import android.app.NotificationManager
+import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.text.format.DateUtils
@@ -13,7 +16,10 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.tdrecyclerview.R
+import com.example.tdrecyclerview.notification.AlarmReceiver
+import com.example.tdrecyclerview.notification.sendNotification
 import com.example.tdrecyclerview.tasklist.Task
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -30,6 +36,7 @@ class TaskActivity : AppCompatActivity() {
     }
     // Instanciation d'un nouvel objet [Task]
     var newTask = Task(id = UUID.randomUUID().toString(), title = "New Task !", description = "New Description", date = Date())
+
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -164,6 +171,16 @@ class TaskActivity : AppCompatActivity() {
                     hour, minute, true)
             dialog.show()
         }
+
+        val notificationManager = ContextCompat.getSystemService(
+            applicationContext,
+            NotificationManager::class.java
+        ) as NotificationManager
+
+        notificationManager.sendNotification(
+            applicationContext.getText(R.string.task_due).toString(),
+            applicationContext
+        )
 
     }
 
