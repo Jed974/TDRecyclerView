@@ -5,7 +5,10 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.graphics.drawable.VectorDrawable
 import androidx.core.app.NotificationCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.toBitmap
 import com.example.tdrecyclerview.MainActivity
 import com.example.tdrecyclerview.R
 
@@ -33,56 +36,57 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         PendingIntent.FLAG_UPDATE_CURRENT
     )
 
-    // TODO: Step 2.0 add style
-    val eggImage = BitmapFactory.decodeResource(
+    // add style
+    /*val eggImage = BitmapFactory.decodeResource(
         applicationContext.resources,
         R.drawable.ic_baseline_create_24
     )
     val bigPicStyle = NotificationCompat.BigPictureStyle()
-        .bigPicture(eggImage)
-        .bigLargeIcon(null)
+        .bigPicture(null)
+        .bigLargeIcon(null)*/
 
-    // TODO: Step 2.2 add snooze action
-    val snoozeIntent = Intent(applicationContext, SnoozeReceiver::class.java)
+    // add snooze action
+    /*val snoozeIntent = Intent(applicationContext, SnoozeReceiver::class.java)
     val snoozePendingIntent: PendingIntent = PendingIntent.getBroadcast(
         applicationContext,
         REQUEST_CODE,
         snoozeIntent,
-        FLAGS)
+        FLAGS)*/
 
-    // TODO: Step 1.2 get an instance of NotificationCompat.Builder
+    //val myLogo = (ResourcesCompat.getDrawable(applicationContext.resources, R.drawable.ic_stat_name, null) as VectorDrawable).toBitmap()
+
+    // get an instance of NotificationCompat.Builder
     // Build the notification
     val builder = NotificationCompat.Builder(
         applicationContext,
         applicationContext.getString(R.string.notification_channel_id)
     )
 
-        // TODO: Step 1.8 use the new 'breakfast' notification channel
 
-        // TODO: Step 1.3 set title, text and icon to builder
-        .setSmallIcon(R.drawable.ic_baseline_create_24)
-        .setContentTitle(applicationContext
-            .getString(R.string.notification_title))
+        // set title, text and icon to builder
+        .setSmallIcon(R.drawable.material_ic_calendar_black_24dp)
+        .setContentTitle(applicationContext.getString(R.string.notification_title))
         .setContentText(messageBody)
 
-        // TODO: Step 1.13 set content intent
+        // set content intent
         .setContentIntent(contentPendingIntent)
         .setAutoCancel(true)
 
-        // TODO: Step 2.1 add style to builder
-        .setStyle(bigPicStyle)
-        .setLargeIcon(eggImage)
+        // add style to builder
+        //.setStyle(bigPicStyle)
+        //.setLargeIcon(eggImage)
 
-        // TODO: Step 2.3 add snooze action
-        .addAction(
-            R.drawable.ic_baseline_create_24,
+        // add snooze action
+        /*.addAction(
+            //R.drawable.ic_baseline_create_24,
             applicationContext.getString(R.string.snooze),
             snoozePendingIntent
-        )
+        )*/
 
-        // TODO: Step 2.5 set priority
-        .setPriority(NotificationCompat.PRIORITY_HIGH)
-    // TODO: Step 1.4 call notify
+        // set priority
+        //.setPriority(NotificationCompat.PRIORITY_HIGH)
+
+    // call notify
     notify(NOTIFICATION_ID, builder.build())
     println("notification")
 }

@@ -88,6 +88,18 @@ class TaskActivity : AppCompatActivity() {
             intent.putExtra(TASK_KEY, Json.encodeToString(newTask))
             //println(intent.extras?.get(TASK_KEY))
             setResult(RESULT_OK, intent)
+
+            val notificationManager = ContextCompat.getSystemService(
+                this,
+                NotificationManager::class.java
+            ) as NotificationManager
+
+            notificationManager.sendNotification(
+                this.getText(R.string.task_due).toString(),
+                applicationContext
+            )
+            //println("notification")
+
             finish()
 
         }
@@ -172,17 +184,6 @@ class TaskActivity : AppCompatActivity() {
                     hour, minute, true)
             dialog.show()
         }
-
-        val notificationManager = ContextCompat.getSystemService(
-            this,
-            NotificationManager::class.java
-        ) as NotificationManager
-
-        notificationManager.sendNotification(
-            this.getText(R.string.task_due).toString(),
-            applicationContext
-        )
-        //println("hello")
 
     }
 
