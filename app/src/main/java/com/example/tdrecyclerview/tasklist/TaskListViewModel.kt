@@ -38,7 +38,7 @@ class TaskListViewModel(private var adapter: TaskListAdapter): ViewModel() {
     fun addTask()
     {
         viewModelScope.launch {
-            val task = Task(id = UUID.randomUUID().toString(), title = "New Task", description = "new com.example.tdrecyclerview.task")
+            val task = Task(id = UUID.randomUUID().toString(), title = "New Task", description = "new com.example.tdrecyclerview.task", Date())
 
             var newTask: Task
             val fetchedTasks = repository.createTask(task)

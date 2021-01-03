@@ -1,10 +1,13 @@
 package com.example.tdrecyclerview.tasklist
 
+import android.icu.text.SimpleDateFormat
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tdrecyclerview.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -21,12 +24,17 @@ class TaskListAdapter() : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>()
     var onLongClickListener: ((Task) -> Boolean)? = null
 
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        @RequiresApi(Build.VERSION_CODES.N)
         fun bind(task : Task) {
             val apply = itemView.apply { // `apply {}` permet d'éviter de répéter `itemView.*`
                 var taskTextView = findViewById<TextView>(R.id.TitleTextView)
                 taskTextView.text = task.title
                 var taskDescriptionView = findViewById<TextView>(R.id.DescriptionTextView)
                 taskDescriptionView.text = task.description
+                var taskDateView = findViewById<TextView>(R.id.DateTextViewItem)
+                taskDateView.text = SimpleDateFormat("dd/MM/yyyy").format(task.date)
+                var taskTimeView = findViewById<TextView>(R.id.TimeTextViewItem)
+                taskTimeView.text = SimpleDateFormat("hh:mm").format(task.date)
                 itemView.setOnLongClickListener {
                     onLongClickListener?.invoke(task) ?: false
                 }
@@ -40,6 +48,7 @@ class TaskListAdapter() : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>()
         return TaskViewHolder(itemView)
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         holder.bind(taskList[position])
         var deleteTaskButton = holder.itemView.findViewById<Button>(R.id.DeleteTaskButton)
