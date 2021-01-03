@@ -100,7 +100,9 @@ class TaskActivity : AppCompatActivity() {
             val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
             val intent = Intent(this, AlarmReceiver::class.java)
             val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, newDate.time , pendingIntent)
+            var calendar =Calendar.getInstance()
+            calendar.time = newDate
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP,  calendar.timeInMillis , pendingIntent)
             //println("notification")
 
             finish()
