@@ -32,9 +32,15 @@ class TaskListAdapter() : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>()
                 var taskDescriptionView = findViewById<TextView>(R.id.DescriptionTextView)
                 taskDescriptionView.text = task.description
                 var taskDateView = findViewById<TextView>(R.id.DateTextViewItem)
-                taskDateView.text = SimpleDateFormat("dd/MM/yyyy").format(task.date)
+                if(task.date != null)
+                    taskDateView.text = SimpleDateFormat("dd/MM/yyyy").format(task.date)
+                else
+                    taskDateView.text = "No date"
                 var taskTimeView = findViewById<TextView>(R.id.TimeTextViewItem)
-                taskTimeView.text = SimpleDateFormat("hh:mm").format(task.date)
+                if(task.date != null)
+                    taskTimeView.text = SimpleDateFormat("hh:mm").format(task.date)
+                else
+                    taskTimeView.text = "No time"
                 itemView.setOnLongClickListener {
                     onLongClickListener?.invoke(task) ?: false
                 }

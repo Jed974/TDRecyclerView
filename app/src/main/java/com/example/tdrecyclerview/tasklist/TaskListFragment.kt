@@ -110,7 +110,10 @@ class TaskListFragment : Fragment()
         adapter.onLongClickListener = {
             val sendIntent : Intent = Intent().apply {
                 action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, "**" + it.title + "** *("+ SimpleDateFormat("on dd/MM/yyyy at hh:mm").format(it.date)+")*: " + it.description)
+                if(it.date != null)
+                    putExtra(Intent.EXTRA_TEXT, "**" + it.title + "** *("+ SimpleDateFormat("on dd/MM/yyyy at hh:mm").format(it.date)+")*: " + it.description)
+                else
+                    putExtra(Intent.EXTRA_TEXT, "**" + it.title + "** : " + it.description)
 
                 type = "text/plain"
             }
